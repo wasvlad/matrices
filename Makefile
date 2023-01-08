@@ -8,9 +8,9 @@ install: create_libraries copy
 .PHONY: create_libraries
 create_libraries:
 	-mkdir /usr/local/include/WVL
-	-mkdir /usr/local/include/WVL/matrixes
+	-mkdir /usr/local/include/WVL/matrices
 	-mkdir /usr/local/lib/WVL/
-	-mkdir /usr/local/lib/WVL/matrixes
+	-mkdir /usr/local/lib/WVL/matrices
 
 .PHONY: copy
 copy: copyinclude
