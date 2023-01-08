@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
-#include<WVL/matrixes/vector.h>
-#include<WVL/matrixes/matrix.h>
+#include<WVL/matrices/vector.h>
+#include<WVL/matrices/matrix.h>
 using namespace std;
 mt19937 rnd(time(0));
-void test_matrixes(int &exit_code)
+void test_matrices(int &exit_code)
 {
 	{
 		Math_Matrix<int> mat(2, 3);
@@ -1282,7 +1282,7 @@ int main()
 
 	cout << "\n\n******************************MATRIXES******************************\n\n";
 
-	test_matrixes(exit_code);
+	test_matrices(exit_code);
 
 	return exit_code;
 }
