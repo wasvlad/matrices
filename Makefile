@@ -1,5 +1,5 @@
-include = /usr/local/include/WVL/matrixes/
-lib = /usr/local/lib/WVL/matrixes/
+include = /usr/local/include/WVL/matrices/
+lib = /usr/local/lib/WVL/matrices/
 
 .PHONY: install
 install: create_libraries copy
