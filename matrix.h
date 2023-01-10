@@ -352,23 +352,6 @@ public:
 		return *this;
 	}
 
-	Math_Matrix operator *(Math_Matrix<number> b)
-	{
-		if(n != b.m)throw WrongDimensionException();
-		Math_Matrix<number> c(m, b.n);
-		for(int i = 0; i < m; i++)
-		{
-			for(int j = 0; j < b.n; j++)
-			{
-				for(int k = 0; k < n; k++)
-				{
-					c.mas[j][i] += mas[k][i] * b.mas[j][k];
-				}
-			}
-		}
-		return c;
-	}
-
 	Math_Matrix transpose()
 	{
 		Math_Matrix<number> c(n, m);
@@ -495,6 +478,94 @@ public:
 		n += b.n;
 	}
 
+	Math_Matrix operator *(Math_Matrix<number> b)
+	{
+		if(n != b.n || m != b.m)throw WrongDimensionException();
+		Math_Matrix<number> c = *this;
+		for(int i = 0; i < n; i++)
+		{
+			c.mas[i] *= b.mas[i];
+		}
+		return c;
+	}
+
+	Math_Matrix& operator *=(Math_Matrix<number> b)
+	{
+		if(n != b.n || m != b.m)throw WrongDimensionException();
+		for(int i = 0; i < n; i++)
+		{
+			mas[i] *= b.mas[i];
+		}
+		return *this;
+	}
+
+	Math_Matrix operator /(Math_Matrix<number> b)
+	{
+		if(n != b.n || m != b.m)throw WrongDimensionException();
+		Math_Matrix<number> c = *this;
+		for(int i = 0; i < n; i++)
+		{
+			c.mas[i] /= b.mas[i];
+		}
+		return c;
+	}
+
+	Math_Matrix& operator /=(Math_Matrix<number> b)
+	{
+		if(n != b.n || m != b.m)throw WrongDimensionException();
+		for(int i = 0; i < n; i++)
+		{
+			mas[i] /= b.mas[i];
+		}
+		return *this;
+	}
+
+	Math_Matrix dot(Math_Matrix<number> b)
+	{
+		if(n != b.m)throw WrongDimensionException();
+		Math_Matrix<number> c(m, b.n);
+		for(int i = 0; i < m; i++)
+		{
+			for(int j = 0; j < b.n; j++)
+			{
+				for(int k = 0; k < n; k++)
+				{
+					c.mas[j][i] += mas[k][i] * b.mas[j][k];
+				}
+			}
+		}
+		return c;
+	}
+	static Math_Matrix dot(Math_Matrix<number> a, Math_Matrix<number> b)
+	{
+		if(a.n != b.m)throw WrongDimensionException();
+		Math_Matrix<number> c(a.m, b.n);
+		for(int i = 0; i < a.m; i++)
+		{
+			for(int j = 0; j < b.n; j++)
+			{
+				for(int k = 0; k < a.n; k++)
+				{
+					c.mas[j][i] += a.mas[k][i] * b.mas[j][k];
+				}
+			}
+		}
+		return c;
+	}
+
+	Math_Matrix operator -()
+	{
+		Math_Matrix<number> c = *this;
+		for(int i = 0; i < c.get_m(); i++)
+		{
+			for(int j = 0; j < c.get_n(); j++)
+			{
+				c.set(i, j, -c.get(i, j));
+			}
+		}
+		return c;
+	}
+
 	template <class number2>
 	friend std::ostream& operator<<(std::ostream& os, Math_Matrix<number2> obj);
 };
@@ -512,4 +583,18 @@ std::ostream& operator<<(std::ostream& os, Math_Matrix<number> obj)
 		os << '\n';
 	}
 	return os;
+}
+
+
+template <class number, class number2>
+Math_Matrix<number> operator +(number2 &b, Math_Matrix<number> &a)
+{
+	Math_Matrix<number> c = a + b;
+	return c;
+}
+
+template <class number, class number2>
+Math_Matrix<number> operator *(number2 b, Math_Matrix<number> a)
+{
+	return a * b;
 }

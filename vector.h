@@ -250,17 +250,6 @@ public:
 		return *this;
 	}
 
-	number operator *(Math_Vector<number> b)
-	{
-		if(mas.size() != b.mas.size())throw DifferentDimensionException();
-		number c = 0;
-		for(int i = 0; i < mas.size(); i++)
-		{
-			c += mas[i] * b[i];
-		}
-		return c;
-	}
-
 	number length()
 	{
 		number sum = 0;
@@ -289,6 +278,80 @@ public:
 		{
 			mas[i + was] = b[i];
 		}
+	}
+
+	Math_Vector operator *(Math_Vector<number> b)
+	{
+		if(mas.size() != b.mas.size())throw DifferentDimensionException();
+		Math_Vector<number> c(mas.size());
+		for(int i = 0; i < mas.size(); i++)
+		{
+			c[i] = mas[i] * b[i];
+		}
+		return c;
+	}
+
+	Math_Vector& operator *=(Math_Vector<number> b)
+	{
+		if(mas.size() != b.mas.size())throw DifferentDimensionException();
+		for(int i = 0; i < mas.size(); i++)
+		{
+			mas[i] *= b[i];
+		}
+		return *this;
+	}
+
+	Math_Vector operator /(Math_Vector<number> b)
+	{
+		if(mas.size() != b.mas.size())throw DifferentDimensionException();
+		Math_Vector<number> c(mas.size());
+		for(int i = 0; i < mas.size(); i++)
+		{
+			c[i] = mas[i] / b[i];
+		}
+		return c;
+	}
+
+	Math_Vector& operator /=(Math_Vector<number> b)
+	{
+		if(mas.size() != b.mas.size())throw DifferentDimensionException();
+		for(int i = 0; i < mas.size(); i++)
+		{
+			mas[i] /= b[i];
+		}
+		return *this;
+	}
+
+	number dot(Math_Vector<number> b)
+	{
+		if(mas.size() != b.mas.size())throw DifferentDimensionException();
+		number c = 0;
+		for(int i = 0; i < mas.size(); i++)
+		{
+			c += mas[i] * b[i];
+		}
+		return c;
+	}
+
+	static number dot(Math_Vector<number> a, Math_Vector<number> b)
+	{
+		if(a.mas.size() != b.mas.size())throw DifferentDimensionException();
+		number c = 0;
+		for(int i = 0; i < a.mas.size(); i++)
+		{
+			c += a[i] * b[i];
+		}
+		return c;
+	}
+
+	Math_Vector<number> operator -()
+	{
+		Math_Vector<number> c = *this;
+		for(int i = 0; i < mas.size(); i++)
+		{
+			c.mas[i] = -mas[i];
+		}
+		return c;
 	}
 
 	template <class number2>
@@ -322,4 +385,16 @@ std::ostream& operator<<(std::ostream& os, Math_Vector<number> obj)
 	}
 	os << "\n";
 	return os;
+}
+
+template <class number,class number2>
+Math_Vector<number> operator +(number2 b, Math_Vector<number> a)
+{
+	return a + b;
+}
+
+template <class number,class number2>
+Math_Vector<number> operator *(number2 b, Math_Vector<number> a)
+{
+	return a * b;
 }

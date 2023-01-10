@@ -20,11 +20,11 @@ copy: copyinclude
 copyinclude: $(include)vector.h $(include)matrix.h
 	echo headers copied
 
-$(include)vector.h:
+$(include)vector.h: vector.h
 	cp vector.h $(include)vector.h
 	chmod 744 $(include)vector.h
 
-$(include)matrix.h:
+$(include)matrix.h: matrix.h
 	cp matrix.h $(include)matrix.h
 	chmod 744 $(include)vector.h
 

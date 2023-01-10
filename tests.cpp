@@ -263,6 +263,35 @@ void test_matrices(int &exit_code)
 			exit_code = -1;
 		}
 	}
+
+	{
+		Math_Matrix<int> mat1(3, 4);
+		mat1.set(0, 0, 1);
+		mat1.set(2, 3, 3);
+		mat1.set(0, 1, 5);
+		mat1 = mat1 + 1;
+		vector<vector<int> > mas;
+		vector<int> a = {2, 6, 1, 1};
+		mas.push_back(a);
+		a.clear();
+		a = {1, 1, 1, 1};
+		mas.push_back(a);
+		a.clear();
+		a = {1, 1, 1, 4};
+		mas.push_back(a);
+		Math_Matrix<int> res(mas);
+		if(res == mat1)
+		{
+			cout<<"number + matrix passed\n";
+		}
+		else
+		{
+			cout<<"number + matrix FAILED\n";
+			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+	
 	{
 		Math_Matrix<int> mat1(2, 3);
 		Math_Matrix<int> res(2, 4);
@@ -580,49 +609,6 @@ void test_matrices(int &exit_code)
 		vec = {1, 4, 1};
 		mas1.push_back(Math_Vector(vec));
 		mat1 = mas1;
-		Math_Matrix<int> mat2(2, 4);
-		vector<Math_Vector<int> > mas2;
-		vec = {1, 3};
-		mas2.push_back(Math_Vector(vec));
-		vec = {1, 2};
-		mas2.push_back(Math_Vector(vec));
-		vec = {1, 3};
-		mas2.push_back(Math_Vector(vec));
-		vec = {4, 3};
-		mas2.push_back(Math_Vector(vec));
-		mat2 = mas2;
-		Math_Matrix<int> mat3 = mat1 * mat2;
-		Math_Matrix<int> res(3, 4);
-		vector<Math_Vector<int> > mas3;
-		vec = {5, 15, 5};
-		mas3.push_back(Math_Vector(vec));
-		vec = {4, 11, 4};
-		mas3.push_back(Math_Vector(vec));
-		vec = {5, 15, 5};
-		mas3.push_back(Math_Vector(vec));
-		vec = {11, 24, 11};
-		mas3.push_back(Math_Vector(vec));
-		res = mas3;
-		if(res == mat3)
-		{
-			cout<<"matrix * matrix passed\n";
-		}
-		else
-		{
-			cout<<"matrix * matrix FAILED\n";
-			cout << "GET\n" << mat3 << '\n' << "EXCPECTED\n" << res << '\n';
-			exit_code = -1;
-		}
-	}
-
-	{
-		Math_Matrix<int> mat1(3, 2);
-		vector<Math_Vector<int> > mas1;
-		vector<int> vec = {2, 3, 2};
-		mas1.push_back(Math_Vector(vec));
-		vec = {1, 4, 1};
-		mas1.push_back(Math_Vector(vec));
-		mat1 = mas1;
 		Math_Matrix<int> mat3 = mat1.transpose();
 		Math_Matrix<int> res(2, 3);
 		vector<Math_Vector<int> > mas3;
@@ -878,6 +864,275 @@ void test_matrices(int &exit_code)
 		else
 		{
 			cout<<"matrix add_Columns FAILED\n";
+			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(2, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {2, 3};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 4};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+
+		Math_Matrix<int> mat2(2, 2);
+		vector<Math_Vector<int> > mas2;
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 2};
+		mas2.push_back(Math_Vector(vec));
+		mat2 = mas2;
+
+		Math_Matrix<int> mat3 = mat1 * mat2;
+		Math_Matrix<int> res(2, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {2, 9};
+		mas3.push_back(Math_Vector(vec));
+		vec = {1, 8};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat3)
+		{
+			cout<<"matrix * matrix passed\n";
+		}
+		else
+		{
+			cout<<"matrix * matrix FAILED\n";
+			cout << "GET\n" << mat3 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(2, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {2, 3};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 4};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+
+		Math_Matrix<int> mat2(2, 2);
+		vector<Math_Vector<int> > mas2;
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 2};
+		mas2.push_back(Math_Vector(vec));
+		mat2 = mas2;
+
+		mat1 *= mat2;
+
+		Math_Matrix<int> res(2, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {2, 9};
+		mas3.push_back(Math_Vector(vec));
+		vec = {1, 8};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat1)
+		{
+			cout<<"matrix *= matrix passed\n";
+		}
+		else
+		{
+			cout<<"matrix *= matrix FAILED\n";
+			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(2, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {2, 9};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 8};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+
+		Math_Matrix<int> mat2(2, 2);
+		vector<Math_Vector<int> > mas2;
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 2};
+		mas2.push_back(Math_Vector(vec));
+		mat2 = mas2;
+
+		Math_Matrix<int> mat3 = mat1 / mat2;
+		Math_Matrix<int> res(2, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {2, 3};
+		mas3.push_back(Math_Vector(vec));
+		vec = {1, 4};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat3)
+		{
+			cout<<"matrix / matrix passed\n";
+		}
+		else
+		{
+			cout<<"matrix / matrix FAILED\n";
+			cout << "GET\n" << mat3 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(2, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {2, 9};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 8};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+
+		Math_Matrix<int> mat2(2, 2);
+		vector<Math_Vector<int> > mas2;
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 2};
+		mas2.push_back(Math_Vector(vec));
+		mat2 = mas2;
+
+		mat1 /= mat2;
+
+		Math_Matrix<int> res(2, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {2, 3};
+		mas3.push_back(Math_Vector(vec));
+		vec = {1, 4};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat1)
+		{
+			cout<<"matrix /= matrix passed\n";
+		}
+		else
+		{
+			cout<<"matrix /= matrix FAILED\n";
+			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(3, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec = {2, 3, 2};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 4, 1};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+		Math_Matrix<int> mat2(2, 4);
+		vector<Math_Vector<int> > mas2;
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 2};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {4, 3};
+		mas2.push_back(Math_Vector(vec));
+		mat2 = mas2;
+		Math_Matrix<int> mat3 = mat1.dot(mat2);
+		Math_Matrix<int> res(3, 4);
+		vector<Math_Vector<int> > mas3;
+		vec = {5, 15, 5};
+		mas3.push_back(Math_Vector(vec));
+		vec = {4, 11, 4};
+		mas3.push_back(Math_Vector(vec));
+		vec = {5, 15, 5};
+		mas3.push_back(Math_Vector(vec));
+		vec = {11, 24, 11};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat3)
+		{
+			cout<<"matrix dot passed\n";
+		}
+		else
+		{
+			cout<<"matrix dot FAILED\n";
+			cout << "GET\n" << mat3 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(3, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec = {2, 3, 2};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 4, 1};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+		Math_Matrix<int> mat2(2, 4);
+		vector<Math_Vector<int> > mas2;
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 2};
+		mas2.push_back(Math_Vector(vec));
+		vec = {1, 3};
+		mas2.push_back(Math_Vector(vec));
+		vec = {4, 3};
+		mas2.push_back(Math_Vector(vec));
+		mat2 = mas2;
+		Math_Matrix<int> mat3 = Math_Matrix<int>::dot(mat1, mat2);
+		Math_Matrix<int> res(3, 4);
+		vector<Math_Vector<int> > mas3;
+		vec = {5, 15, 5};
+		mas3.push_back(Math_Vector(vec));
+		vec = {4, 11, 4};
+		mas3.push_back(Math_Vector(vec));
+		vec = {5, 15, 5};
+		mas3.push_back(Math_Vector(vec));
+		vec = {11, 24, 11};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat3)
+		{
+			cout<<"static matrix dot passed\n";
+		}
+		else
+		{
+			cout<<"static matrix dot FAILED\n";
+			cout << "GET\n" << mat3 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Matrix<int> mat1(3, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {2, 3, 2};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, 4, 1};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+		mat1 = -mat1;
+		Math_Matrix<int> res(3, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {-2, -3, -2};
+		mas3.push_back(Math_Vector(vec));
+		vec = {-1, -4, -1};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat1)
+		{
+			cout<<"-matrix passed\n";
+		}
+		else
+		{
+			cout<<"-matrix FAILED\n";
 			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
 			exit_code = -1;
 		}
@@ -1213,20 +1468,6 @@ int main()
 		exit_code = -1;
 	}
 
-	mas = {2, 4};
-	res = {1, 2};
-	vec = mas;
-	vec2 = res;
-	if(vec * vec2 == 10)
-	{
-		cout << "Dot product passed\n";
-	}
-	else
-	{
-		cout << "Dot product FAILED\n";
-		exit_code = -1;
-	}
-
 	mas = {4, 3};
 	vec = mas;
 	if(vec.length() == 5)
@@ -1247,6 +1488,7 @@ int main()
 	else
 	{
 		cout << "vector number of dimensions FAILED\n";
+		exit_code = -1;
 	}
 
 	vec = Math_Vector<int>(4);
@@ -1260,6 +1502,7 @@ int main()
 	else
 	{
 		cout << "vector push_back number FAILED\n";
+		exit_code = -1;
 	}
 
 	vec = Math_Vector<int>(0);
@@ -1278,7 +1521,138 @@ int main()
 	else
 	{
 		cout << "vector concatenate FAILED\n";
+		exit_code = -1;
 	}
+
+	{
+		vector<int> mas;
+		vector<int> mas2;
+		mas = {2, 4};
+		mas2 = {3, 2};
+		Math_Vector<int> vec = mas;
+		Math_Vector<int> vec2 = mas2;
+		mas = {6, 8};
+		Math_Vector<int> res = mas;
+		if(vec * vec2 == res)
+		{
+			cout << "vector * vector passed\n";
+		}
+		else
+		{
+			cout << "vector * vector FAILED\n";
+			exit_code = -1;
+		}
+	}
+
+	{
+		vector<int> mas;
+		vector<int> mas2;
+		mas = {2, 4};
+		mas2 = {3, 2};
+		Math_Vector<int> vec = mas;
+		Math_Vector<int> vec2 = mas2;
+		mas = {6, 8};
+		Math_Vector<int> res = mas;
+		vec *= vec2;
+		if(vec == res)
+		{
+			cout << "vector *= vector passed\n";
+		}
+		else
+		{
+			cout << "vector *= vector FAILED\n";
+			exit_code = -1;
+		}
+	}
+
+	{
+		vector<int> mas;
+		vector<int> mas2;
+		mas = {6, 8};
+		mas2 = {3, 2};
+		Math_Vector<int> vec = mas;
+		Math_Vector<int> vec2 = mas2;
+		mas = {2, 4};
+		Math_Vector<int> res = mas;
+		if(vec / vec2 == res)
+		{
+			cout << "vector / vector passed\n";
+		}
+		else
+		{
+			cout << "vector / vector FAILED\n";
+			exit_code = -1;
+		}
+	}
+
+	{
+		vector<int> mas;
+		vector<int> mas2;
+		mas = {6, 8};
+		mas2 = {3, 2};
+		Math_Vector<int> vec = mas;
+		Math_Vector<int> vec2 = mas2;
+		mas = {2, 4};
+		Math_Vector<int> res = mas;
+		vec /= vec2;
+		if(vec == res)
+		{
+			cout << "vector /= vector passed\n";
+		}
+		else
+		{
+			cout << "vector /= vector FAILED\n";
+			exit_code = -1;
+		}
+	}
+	
+	mas = {2, 4};
+	res = {1, 2};
+	vec = mas;
+	vec2 = res;
+	if(vec.dot(vec2) == 10)
+	{
+		cout << "Dot product passed\n";
+	}
+	else
+	{
+		cout << "Dot product FAILED\n";
+		exit_code = -1;
+	}
+
+	{
+		mas = {2, 4};
+		res = {1, 2};
+		vec = mas;
+		vec2 = res;
+		if(Math_Vector<int>::dot(vec, vec2) == 10)
+		{
+			cout << "static Dot product passed\n";
+		}
+		else
+		{
+			cout << "static Dot product FAILED\n";
+			exit_code = -1;
+		}
+	}
+
+	{
+		mas = {2, 4};
+		res = {-2, -4};
+		vec = mas;
+		vec2 = res;
+		vec = -vec;
+		if(vec == vec2)
+		{
+			cout << "-vector passed\n";
+		}
+		else
+		{
+			cout << "-vector FAILED\n";
+			exit_code = -1;
+		}
+	}
+	
 
 	cout << "\n\n******************************MATRIXES******************************\n\n";
 
