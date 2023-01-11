@@ -1137,6 +1137,65 @@ void test_matrices(int &exit_code)
 			exit_code = -1;
 		}
 	}
+
+	{
+		Math_Matrix<int> mat1(3, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {-2, 3, -2};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, -4, 1};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+		mat1 = mat1.converted_elements(abs);
+		Math_Matrix<int> res(3, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {2, 3, 2};
+		mas3.push_back(Math_Vector(vec));
+		vec = {1, 4, 1};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat1)
+		{
+			cout<<"matrix converted_elements passed\n";
+		}
+		else
+		{
+			cout<<"matrix converted_elements FAILED\n";
+			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
+
+
+	{
+		Math_Matrix<int> mat1(3, 2);
+		vector<Math_Vector<int> > mas1;
+		vector<int> vec;
+		vec = {-2, 3, -2};
+		mas1.push_back(Math_Vector(vec));
+		vec = {1, -4, 1};
+		mas1.push_back(Math_Vector(vec));
+		mat1 = mas1;
+		mat1.convert_elements(abs);
+		Math_Matrix<int> res(3, 2);
+		vector<Math_Vector<int> > mas3;
+		vec = {2, 3, 2};
+		mas3.push_back(Math_Vector(vec));
+		vec = {1, 4, 1};
+		mas3.push_back(Math_Vector(vec));
+		res = mas3;
+		if(res == mat1)
+		{
+			cout<<"matrix convert_elements passed\n";
+		}
+		else
+		{
+			cout<<"matrix converted_elements FAILED\n";
+			cout << "GET\n" << mat1 << '\n' << "EXCPECTED\n" << res << '\n';
+			exit_code = -1;
+		}
+	}
 }
 int main()
 {
@@ -1649,6 +1708,80 @@ int main()
 		else
 		{
 			cout << "-vector FAILED\n";
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Vector<double> vec;
+		vector<double> mas;
+		Math_Vector<double> res;
+		mas = {2.0, 4.0};
+		vec = mas;
+		mas = {1.0, 2.0};
+		res = mas;
+		vec = vec.converted_elements(log2);
+		if(vec == res)
+		{
+			cout << "vector converted_elements passed\n";
+		}
+		else
+		{
+			cout << "vector converted_elements FAILED\n";
+			cout << "EXCPECTED\n" << res << '\n' << "GET\n" << vec << '\n';
+			exit_code = -1;
+		}
+
+		mas = {-2.0, 4.0};
+		vec = mas;
+		mas = {2.0, 4.0};
+		res = mas;
+		vec = vec.converted_elements(abs);
+		if(vec == res)
+		{
+			cout << "vector converted_elements passed\n";
+		}
+		else
+		{
+			cout << "vector converted_elements FAILED\n";
+			cout << "EXCPECTED\n" << res << '\n' << "GET\n" << vec << '\n';
+			exit_code = -1;
+		}
+	}
+
+	{
+		Math_Vector<double> vec;
+		vector<double> mas;
+		Math_Vector<double> res;
+		mas = {2.0, 4.0};
+		vec = mas;
+		mas = {1.0, 2.0};
+		res = mas;
+		vec.convert_elements(log2);
+		if(vec == res)
+		{
+			cout << "vector convert_elements passed\n";
+		}
+		else
+		{
+			cout << "vector convert_elements FAILED\n";
+			cout << "EXCPECTED\n" << res << '\n' << "GET\n" << vec << '\n';
+			exit_code = -1;
+		}
+
+		mas = {-2.0, 4.0};
+		vec = mas;
+		mas = {2.0, 4.0};
+		res = mas;
+		vec.convert_elements(abs);
+		if(vec == res)
+		{
+			cout << "vector convert_elements passed\n";
+		}
+		else
+		{
+			cout << "vector convert_elements FAILED\n";
+			cout << "EXCPECTED\n" << res << '\n' << "GET\n" << vec << '\n';
 			exit_code = -1;
 		}
 	}

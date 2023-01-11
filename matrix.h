@@ -566,6 +566,24 @@ public:
 		return c;
 	}
 
+	Math_Matrix<number> converted_elements(number (*f)(number))
+	{
+		Math_Matrix<number> c = *this;
+		for(int i = 0; i < c.n; i++)
+		{
+			c.mas[i].convert_elements(f);
+		}
+		return c;
+	}
+
+	void convert_elements(number (*f)(number))
+	{
+		for(int i = 0; i < mas.size(); i++)
+		{
+			mas[i].convert_elements(f);
+		}
+	}
+
 	template <class number2>
 	friend std::ostream& operator<<(std::ostream& os, Math_Matrix<number2> obj);
 };

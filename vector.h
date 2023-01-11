@@ -354,6 +354,24 @@ public:
 		return c;
 	}
 
+	Math_Vector<number> converted_elements(number (*f)(number))
+	{
+		Math_Vector<number> c = *this;
+		for(int i = 0; i < c.mas.size(); i++)
+		{
+			c[i] = f(c[i]);
+		}
+		return c;
+	}
+
+	void convert_elements(number (*f)(number))
+	{
+		for(int i = 0; i < mas.size(); i++)
+		{
+			mas[i] = f(mas[i]);
+		}
+	}
+
 	template <class number2>
 	friend std::ostream& operator<<(std::ostream& os, Math_Vector<number2> obj);
 	
