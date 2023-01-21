@@ -31,8 +31,8 @@ $(include)matrix.h: matrix.h
 .PHONY: test
 test: test.o
 	./test.o
-test.o:install tests.cpp
-	g++ tests.cpp -o test.o
+test.o: test.cpp
+	g++ test.cpp -o test.o
 
 
 .PHONY: remove
