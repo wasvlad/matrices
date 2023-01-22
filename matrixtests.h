@@ -1,5 +1,7 @@
 #include"matrix.h"
 
+using namespace std;
+
 TEST(MatrixConstructors, Contructor1){
 	vector<vector<int> > mas = {{1, 2}, {4, 2}};
 	wvl::Math_Matrix<int> mat1(mas);

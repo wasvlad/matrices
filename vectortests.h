@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "vector.h"
 
+using namespace std;
 
 TEST(VectorConstructor, ConstructorTest1)
 {

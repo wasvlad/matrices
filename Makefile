@@ -31,8 +31,8 @@ $(include)matrix.h: matrix.h
 .PHONY: test
 test: test.o
 	./test.o
-test.o: test.cpp
-	g++ test.cpp -o test.o
+test.o: test.cpp vector.h matrix.h
+	g++ test.cpp /usr/local/lib/libgtest.a -o test.o
 
 
 .PHONY: remove

@@ -1,47 +1,48 @@
 #pragma once
 
-#include<bits/stdc++.h>
+#include<vector>
+#include<string>
+#include<iostream>
 #include<exception>
-using namespace std;
 
 namespace wvl{
 
 class VectorConstructorException : public std::exception{
 	public:
-		VectorConstructorException(string message){
-			cerr << message << '\n';
+		VectorConstructorException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Error constructing vector";
     }
 };
 
 class VectorDifferentDimensionsException : public std::exception{
 	public:
-		VectorDifferentDimensionsException(string message){
-			cerr << message << '\n';
+		VectorDifferentDimensionsException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Vectors have different dimensions";
     }
 };
 
 class VectorFixedSizeException : public std::exception{
 	public:
-		VectorFixedSizeException(string message){
-			cerr << message << '\n';
+		VectorFixedSizeException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Error, can't change number of dimensions. This vector has fixed dimension.";
     }
 };
 
 class VectorOutOfRange : public std::exception{
 	public:
-		VectorOutOfRange(string message){
-			cerr << message << '\n';
+		VectorOutOfRange(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Error, out of dimensions";
     }
 };
@@ -49,10 +50,10 @@ string what () {
 
 class VectorException: public std::exception{
 	public:
-		VectorException(string message){
-			cerr << message << '\n';
+		VectorException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Vector exception";
     }
 };
@@ -62,7 +63,7 @@ string what () {
 template <class number>
 class Math_Vector{
 private:
-	vector<number> mas;
+	std::vector<number> mas;
 protected:
 	bool fixed_size = false;
 public:
@@ -84,12 +85,12 @@ public:
 		mas.resize(d);
 		//dim = d;
 	}
-	Math_Vector(vector<number> &mas)
+	Math_Vector(std::vector<number> &mas)
 	{
 		this -> mas = mas;
 	}
 
-	vector<number> get()
+	std::vector<number> get()
 	{
 		return mas;
 	}
@@ -101,7 +102,7 @@ public:
 		return *this;
 	}
 
-	Math_Vector& operator =(vector<number> b)
+	Math_Vector& operator =(std::vector<number> b)
 	{
 		if(this -> fixed_size && b.size() != mas.size())throw VectorFixedSizeException("EXCEPTION: Can't change dimensionality of vector.");
 		mas = b;
@@ -138,7 +139,7 @@ public:
 		}
 	}
 
-	void concatenate(vector<number> a)
+	void concatenate(std::vector<number> a)
 	{
 		if(this -> fixed_size)throw VectorFixedSizeException("EXCEPTION: Can't change dimensionality of vector.");
 		int was = mas.size();
@@ -476,7 +477,7 @@ public:
 		return c;
 	}
 
-	Math_Vector<number> concatenated(vector<number> a)
+	Math_Vector<number> concatenated(std::vector<number> a)
 	{
 		Math_Vector<number> c;
 		c.mas.resize(mas.size() + a.size());
@@ -554,7 +555,7 @@ std::istream& operator>>(std::istream& os, Math_Vector<number> &obj)
 {
 	int n;
 	os >> n;
-	vector<number> mas(n);
+	std::vector<number> mas(n);
 	for(int i = 0; i < n; i++)
 	{
 		os >> mas[i];

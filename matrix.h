@@ -1,49 +1,49 @@
 #pragma once
 
-#include<bits/stdc++.h>
+#include<vector>
+#include<string>
+#include<iostream>
 #include"vector.h"
 #include<exception>
-
-using namespace std;
 
 namespace wvl{
 
 class ConvertingToMatrixException : public std::exception {
     public:
-		ConvertingToMatrixException(string message){
-			cerr << message << '\n';
+		ConvertingToMatrixException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Error converting to matrix, please check that your data can be converted to Math_Matrix";
     }
 };
 
 class MatrixConstructorException : public std::exception {
     public:
-		MatrixConstructorException(string message){
-			cerr << message << '\n';
+		MatrixConstructorException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Constructing matrix exception";
     }
 };
 
 class MatrixIndexException{
 	public:
-		MatrixIndexException(string message){
-			cerr << message << '\n';
+		MatrixIndexException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Matrix index out of range";
     }
 };
 
 class MatrixDifferentDimensionException{
 	public:
-		MatrixDifferentDimensionException(string message){
-			cerr << message << '\n';
+		MatrixDifferentDimensionException(std::string message){
+			std::cerr << message << '\n';
 		}
-string what () {
+std::string what () {
         return "Can't process operations between different dimensions";
     }
 };
@@ -54,7 +54,7 @@ class Math_Matrix: public VectorBlocker
 private:
 	bool allow_block = false;
 	int m,n;
-	vector<Math_Vector<number> > mas;
+	std::vector<Math_Vector<number> > mas;
 	void block_all()
 	{
 		for(int i = 0; i < n; i++)
