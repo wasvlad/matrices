@@ -1,15 +1,13 @@
-#include"matrix.h"
-
-using namespace std;
+#include <WVL/matrices/matrix.h>
 
 TEST(MatrixConstructors, Contructor1){
-	vector<vector<int> > mas = {{1, 2}, {4, 2}};
+	std::vector<std::vector<int> > mas = {{1, 2}, {4, 2}};
 	wvl::Math_Matrix<int> mat1(mas);
 	EXPECT_EQ(mat1.get(), mas);
 }
 
 TEST(MatrixConstructors, Contructor2){
-	vector<vector<int> > mas = {{0, 0, 0}, {0, 0, 0}};
+	std::vector<std::vector<int> > mas = {{0, 0, 0}, {0, 0, 0}};
 	wvl::Math_Matrix<int> mat1(2, 3);
 	EXPECT_EQ(mat1.get(), mas);
 	EXPECT_THROW({mat1 = wvl::Math_Matrix<int>(-1, 2);}, wvl::MatrixConstructorException);
@@ -17,28 +15,28 @@ TEST(MatrixConstructors, Contructor2){
 }
 
 TEST(MatrixConstructors, Contructor3){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	wvl::Math_Matrix<int> mat1;
 	EXPECT_EQ(mat1.get(), mas);
 }
 
 TEST(MatrixConstructors, Contructor4){
-	vector<vector<int> > mas = {{0, 0, 0}, {0, 0, 0}};
-	wvl::Math_Matrix<int> mat1(make_pair(2, 3));
+	std::vector<std::vector<int> > mas = {{0, 0, 0}, {0, 0, 0}};
+	wvl::Math_Matrix<int> mat1(std::make_pair(2, 3));
 	EXPECT_EQ(mat1.get(), mas);
-	EXPECT_THROW({mat1 = wvl::Math_Matrix<int>(make_pair(1, -2));}, wvl::MatrixConstructorException);
-	EXPECT_THROW({mat1 = wvl::Math_Matrix<int>(make_pair(-1, 2));}, wvl::MatrixConstructorException);
+	EXPECT_THROW({mat1 = wvl::Math_Matrix<int>(std::make_pair(1, -2));}, wvl::MatrixConstructorException);
+	EXPECT_THROW({mat1 = wvl::Math_Matrix<int>(std::make_pair(-1, 2));}, wvl::MatrixConstructorException);
 }
 
 TEST(MatrixConstructors, Contructor5){
-	vector<vector<int> > mas = {{1}, {2}, {3}};
-	vector<int> mas2 = {1, 2, 3};
+	std::vector<std::vector<int> > mas = {{1}, {2}, {3}};
+	std::vector<int> mas2 = {1, 2, 3};
 	wvl::Math_Matrix<int> mat1(mas2);
 	EXPECT_EQ(mat1.get(), mas);
 }
 
 TEST(MatrixGets, SubscriptingOperator){
-	vector<vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
+	std::vector<std::vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	EXPECT_EQ(mat1[0][0], mas[0][0]);
 	EXPECT_EQ(mat1[2][0], mas[0][2]);
@@ -49,9 +47,9 @@ TEST(MatrixGets, SubscriptingOperator){
 }
 
 TEST(MatrixGets, get_vectors){
-	vector<vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
-	vector<wvl::Math_Vector<int> > res;
-	vector<int> a;
+	std::vector<std::vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
+	std::vector<wvl::Math_Vector<int> > res;
+	std::vector<int> a;
 	a = {1, 3};
 	res.push_back(wvl::Math_Vector(a));
 	a = {4, 5};
@@ -64,21 +62,21 @@ TEST(MatrixGets, get_vectors){
 }
 
 TEST(MatrixGets, get_n){
-	vector<vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
+	std::vector<std::vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
 
 	wvl::Math_Matrix<int> mat1(mas);
 	EXPECT_EQ(mat1.get_n(), 3);
 }
 
 TEST(MatrixGets, get_m){
-	vector<vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
+	std::vector<std::vector<int> > mas = {{1, 4, 1}, {3, 5, 1}};
 
 	wvl::Math_Matrix<int> mat1(mas);
 	EXPECT_EQ(mat1.get_m(), 2);
 }
 
 TEST(MatrixAriphmeticOperators, SumOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 6, 3}, {5, 7, 3}};
@@ -87,10 +85,10 @@ TEST(MatrixAriphmeticOperators, SumOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, SumOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
-	vector<int> mas2 = {2, 5};
+	std::vector<int> mas2 = {2, 5};
 	wvl::Math_Vector<int> vec(mas2);
 	mas ={{1, 4, 1, 2}, {3, 5, 1, 5}};
 
@@ -100,7 +98,7 @@ TEST(MatrixAriphmeticOperators, SumOperator2){
 
 
 TEST(MatrixAriphmeticOperators, SumOperator3){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -112,7 +110,7 @@ TEST(MatrixAriphmeticOperators, SumOperator3){
 }
 
 TEST(MatrixAriphmeticOperators, SumAssigmentOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 6, 3}, {5, 7, 3}};
@@ -122,10 +120,10 @@ TEST(MatrixAriphmeticOperators, SumAssigmentOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, SumAssigmentOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
-	vector<int> mas2 = {2, 5};
+	std::vector<int> mas2 = {2, 5};
 	wvl::Math_Vector<int> vec(mas2);
 	mas ={{1, 4, 1, 2}, {3, 5, 1, 5}};
 	mat1 += vec;
@@ -136,7 +134,7 @@ TEST(MatrixAriphmeticOperators, SumAssigmentOperator2){
 
 
 TEST(MatrixAriphmeticOperators, SumAssigmentOperator3){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -149,7 +147,7 @@ TEST(MatrixAriphmeticOperators, SumAssigmentOperator3){
 }
 
 TEST(MatrixAriphmeticOperators, SubstractionOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{-1, 2, -1}, {1, 3, -1}};
@@ -158,7 +156,7 @@ TEST(MatrixAriphmeticOperators, SubstractionOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, SubstractionOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -170,7 +168,7 @@ TEST(MatrixAriphmeticOperators, SubstractionOperator2){
 }
 
 TEST(MatrixAriphmeticOperators, SubstractionOperator3){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{-1, -4, -1}, {-3, -5, -1}};
@@ -179,7 +177,7 @@ TEST(MatrixAriphmeticOperators, SubstractionOperator3){
 }
 
 TEST(MatrixAriphmeticOperators, SubstractionAssigmentOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{-1, 2, -1}, {1, 3, -1}};
@@ -189,7 +187,7 @@ TEST(MatrixAriphmeticOperators, SubstractionAssigmentOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, SubstractionAssigmentOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -202,7 +200,7 @@ TEST(MatrixAriphmeticOperators, SubstractionAssigmentOperator2){
 }
 
 TEST(MatrixAriphmeticOperators, MultiplicationOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 12, 3}, {9, 15, 3}};
@@ -211,7 +209,7 @@ TEST(MatrixAriphmeticOperators, MultiplicationOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, MultiplicationOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -223,7 +221,7 @@ TEST(MatrixAriphmeticOperators, MultiplicationOperator2){
 }
 
 TEST(MatrixAriphmeticOperators, MultiplicationAssigmentOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 12, 3}, {9, 15, 3}};
@@ -233,7 +231,7 @@ TEST(MatrixAriphmeticOperators, MultiplicationAssigmentOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, MultiplicationAssigmentOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{1, 4, 1}, {3, 5, 1}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -246,7 +244,7 @@ TEST(MatrixAriphmeticOperators, MultiplicationAssigmentOperator2){
 }
 
 TEST(MatrixAriphmeticOperators, DivisionOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{3, 12, 3}, {9, 15, 3}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{1, 4, 1}, {3, 5, 1}};
@@ -255,7 +253,7 @@ TEST(MatrixAriphmeticOperators, DivisionOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, DivisionOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -267,7 +265,7 @@ TEST(MatrixAriphmeticOperators, DivisionOperator2){
 }
 
 TEST(MatrixAriphmeticOperators, DivisionAssigmentOperator1){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{3, 12, 3}, {9, 15, 3}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{1, 4, 1}, {3, 5, 1}};
@@ -277,7 +275,7 @@ TEST(MatrixAriphmeticOperators, DivisionAssigmentOperator1){
 }
 
 TEST(MatrixAriphmeticOperators, DivisionAssigmentOperator2){
-	vector<vector<int> > mas;
+	std::vector<std::vector<int> > mas;
 	mas = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas);
 	mas = {{3, 1, 7}, {3, 2, 5}};
@@ -290,10 +288,10 @@ TEST(MatrixAriphmeticOperators, DivisionAssigmentOperator2){
 }
 
 TEST(MatrixAriphmeticOperators, prefixIncrement){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
-	vector<vector<int> > mas2;
+	std::vector<std::vector<int> > mas2;
 	mas2 = {{4, 5, 8}, {10, 11, 6}};
 	wvl::Math_Matrix<int> mat2(++mat1);
 
@@ -302,10 +300,10 @@ TEST(MatrixAriphmeticOperators, prefixIncrement){
 }
 
 TEST(MatrixAriphmeticOperators, postfixIncrement){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
-	vector<vector<int> > mas2;
+	std::vector<std::vector<int> > mas2;
 	mas2 = {{4, 5, 8}, {10, 11, 6}};
 	wvl::Math_Matrix<int> mat2(mat1++);
 
@@ -314,10 +312,10 @@ TEST(MatrixAriphmeticOperators, postfixIncrement){
 }
 
 TEST(MatrixAriphmeticOperators, prefixDecrement){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
-	vector<vector<int> > mas2;
+	std::vector<std::vector<int> > mas2;
 	mas2 = {{2, 3, 6}, {8, 9, 4}};
 	wvl::Math_Matrix<int> mat2(--mat1);
 
@@ -326,10 +324,10 @@ TEST(MatrixAriphmeticOperators, prefixDecrement){
 }
 
 TEST(MatrixAriphmeticOperators, postfixDecrement){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
-	vector<vector<int> > mas2;
+	std::vector<std::vector<int> > mas2;
 	mas2 = {{2, 3, 6}, {8, 9, 4}};
 	wvl::Math_Matrix<int> mat2(mat1--);
 
@@ -338,7 +336,7 @@ TEST(MatrixAriphmeticOperators, postfixDecrement){
 }
 
 TEST(MatrixModificating, AssigmentOperator1){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	wvl::Math_Matrix<int> mat2(2, 4);
@@ -348,7 +346,7 @@ TEST(MatrixModificating, AssigmentOperator1){
 }
 
 TEST(MatrixModificating, AssigmentOperator2){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	wvl::Math_Matrix<int> mat2(2, 4);
@@ -361,11 +359,11 @@ TEST(MatrixModificating, AssigmentOperator2){
 }
 
 TEST(MatrixModificating, AssigmentOperator3){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	wvl::Math_Matrix<int> mat2(2, 4);
-	vector<wvl::Math_Vector<int> > mas2;
+	std::vector<wvl::Math_Vector<int> > mas2;
 	mas2.push_back(wvl::Math_Vector<int>(mat1[0]));
 	mas2.push_back(wvl::Math_Vector<int>(mat1[1]));
 	mas2.push_back(wvl::Math_Vector<int>(mat1[2]));
@@ -377,7 +375,7 @@ TEST(MatrixModificating, AssigmentOperator3){
 }
 
 TEST(MatrixModificating, transpose){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{3, 9}, {4, 10}, {7, 5}};
@@ -387,7 +385,7 @@ TEST(MatrixModificating, transpose){
 }
 
 TEST(MatrixModificating, transposed){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{3, 9}, {4, 10}, {7, 5}};
@@ -397,7 +395,7 @@ TEST(MatrixModificating, transposed){
 }
 
 TEST(MatrixModificating, pop_back){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{3, 4}, {9, 10}};
@@ -409,7 +407,7 @@ TEST(MatrixModificating, pop_back){
 }
 
 TEST(MatrixModificating, swap_columns){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{7, 4, 3}, {5, 10, 9}};
@@ -424,7 +422,7 @@ TEST(MatrixModificating, swap_columns){
 }
 
 TEST(MatrixModificating, swap_rows){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{9, 10, 5}, {3, 4, 7}};
@@ -440,7 +438,7 @@ TEST(MatrixModificating, swap_rows){
 
 
 TEST(MatrixModificating, add_rows){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{9, 10, 4}, {3, 4, 4}};
@@ -455,10 +453,10 @@ TEST(MatrixModificating, add_rows){
 }
 
 TEST(MatrixModificating, add_row){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
-	vector<int> mas2;
+	std::vector<int> mas2;
 	mas2 = {4, 5, 6};
 	wvl::Math_Vector<int> mat2(mas2);
 	mas1 = {{3, 4, 7}, {9, 10, 5}, {4, 5, 6}};
@@ -471,7 +469,7 @@ TEST(MatrixModificating, add_row){
 }
 
 TEST(MatrixModificating, add_columns){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{3, 4}, {5, 7}};
@@ -491,7 +489,7 @@ int f(int a)
 }
 
 TEST(MatrixModificating, convert_elements){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{9, 16, 7 * 7}, {9 * 9, 100, 25}};
@@ -501,7 +499,7 @@ TEST(MatrixModificating, convert_elements){
 }
 
 TEST(MatrixModificating, converted_elements){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	mas1 = {{9, 16, 7 * 7}, {9 * 9, 100, 25}};
@@ -511,7 +509,7 @@ TEST(MatrixModificating, converted_elements){
 }
 
 TEST(MatrixBoolOperations, equal){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 
@@ -520,7 +518,7 @@ TEST(MatrixBoolOperations, equal){
 }
 
 TEST(MatrixBoolOperations, notEqual){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 
@@ -529,15 +527,15 @@ TEST(MatrixBoolOperations, notEqual){
 }
 
 TEST(MatrixOperations, dot){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{3, 4, 7}, {9, 10, 5}};
 	wvl::Math_Matrix<int> mat1(mas1);
 
-	vector<vector<int> > mas2;
+	std::vector<std::vector<int> > mas2;
 	mas2 = {{3, 4}, {9, 10}, {9, 10}};
 	wvl::Math_Matrix<int> mat2(mas2);
 
-	vector<vector<int> > mas3;
+	std::vector<std::vector<int> > mas3;
 	mas3 = {{108, 122}, {162, 186}};
 	wvl::Math_Matrix<int> mat3(mas3);
 
@@ -545,7 +543,7 @@ TEST(MatrixOperations, dot){
 }
 
 TEST(MatrixOperations, det0){
-	vector<vector<double> > mas1;
+	std::vector<std::vector<double> > mas1;
 	mas1 = {{4, 2, 5}, {7, 4, 2}, {8, 5, 3}};
 	wvl::Math_Matrix<double> mat1(mas1);
 
@@ -554,7 +552,7 @@ TEST(MatrixOperations, det0){
 }
 
 TEST(MatrixOperations, det1){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{4, 2, 5}, {7, 4, 2}, {8, 5, 3}};
 	wvl::Math_Matrix<int> mat1(mas1);
 
@@ -563,19 +561,27 @@ TEST(MatrixOperations, det1){
 }
 
 TEST(MatrixOperations, stream){
-	vector<vector<int> > mas1;
+	std::vector<std::vector<int> > mas1;
 	mas1 = {{4, 2, 5}, {7, 4, 2}, {8, 5, 3}, {7, 4, 2}};
 	wvl::Math_Matrix<int> mat1(mas1);
 	wvl::Math_Matrix<int> mat2;
 
-	fstream file;
-	file.open("test.txt", ios::out);
+	std::fstream file;
+	file.open("test.txt", std::ios::out);
 	file << mat1;
 	file.close();
 
-	file.open("test.txt", ios::in);
+	file.open("test.txt", std::ios::in);
 	file >> mat2;
 	file.close();
 
 	EXPECT_EQ(mat1.get(), mat2.get());
+}
+
+TEST(MatrixMethods, sum){
+	std::vector<std::vector<int> > mas1;
+	mas1 = {{4, 2, 5}, {7, 4, 2}, {8, 5, 3}, {7, 4, 2}};
+	wvl::Math_Matrix<int> mat1(mas1);
+
+	EXPECT_EQ(mat1.sum(), 11 + 13 + 16 + 13);
 }

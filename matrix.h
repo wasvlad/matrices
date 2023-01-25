@@ -3,6 +3,7 @@
 #include<vector>
 #include<string>
 #include<iostream>
+#include<algorithm>
 #include"vector.h"
 #include<exception>
 
@@ -33,6 +34,7 @@ class MatrixIndexException{
 		MatrixIndexException(std::string message){
 			std::cerr << message << '\n';
 		}
+
 std::string what () {
         return "Matrix index out of range";
     }
@@ -70,9 +72,9 @@ private:
 		}
 	}
 public:
-	vector<vector<number> > get()
+	std::vector<std::vector<number> > get()
 	{
-		vector<vector<number> > res(m);
+		std::vector<std::vector<number> > res(m);
 		for(int j = 0; j < m; j++)
 		{
 			res[j].resize(n);
@@ -84,7 +86,7 @@ public:
 		return res;
 	}
 
-	Math_Matrix(vector<vector<number> > &mas)
+	Math_Matrix(std::vector<std::vector<number> > &mas)
 	{
 		this -> m = mas.size();
 		this -> n = mas[0].size();
@@ -132,7 +134,7 @@ public:
 		block_all();
 	}
 
-	Math_Matrix(pair<int, int> mn)
+	Math_Matrix(std::pair<int, int> mn)
 	{
 		if(mn.first < 0 || mn.second < 0)throw MatrixConstructorException("Matrix dimensionality can't be smaller than 0.");
 		this -> m = mn.first;
@@ -145,7 +147,7 @@ public:
 		block_all();
 	}
 
-	Math_Matrix(vector<Math_Vector<number>> &vectors)
+	Math_Matrix(std::vector<Math_Vector<number>> &vectors)
 	{
 		n = vectors.size();
 		m = vectors[0].get_dimensions();
@@ -173,7 +175,7 @@ public:
 		return mas[index];
 	}
 
-	vector<Math_Vector<number> > get_vectors()
+	std::vector<Math_Vector<number> > get_vectors()
 	{
 		return mas;
 	}
@@ -432,7 +434,7 @@ public:
 		return *this;
 	}
 
-	Math_Matrix& operator =(vector<vector<number> > &mas)
+	Math_Matrix& operator =(std::vector<std::vector<number> > &mas)
 	{
 		this -> m = mas.size();
 		this -> n = mas[0].size();
@@ -455,7 +457,7 @@ public:
 		return *this;
 	}
 
-	Math_Matrix& operator =(vector<Math_Vector<number>> &vectors)
+	Math_Matrix& operator =(std::vector<Math_Vector<number>> &vectors)
 	{
 		n = vectors.size();
 		m = vectors[0].get_dimensions();
@@ -510,7 +512,7 @@ public:
 	void swap_columns(int i, int j)
 	{
 		if(i < 0 || j < 0 || i >= n || j >= n) throw MatrixIndexException("Can't swap columns, index is out of range");
-		swap(mas[i], mas[j]);
+		std::swap(mas[i], mas[j]);
 	}
 
 	void swap_rows(int i, int j)
@@ -518,7 +520,7 @@ public:
 		if(i < 0 || j < 0 || i >= m || j >= m) throw MatrixIndexException("Can't swap rows, index is out of range");
 		for(int z = 0; z < n; z++)
 		{
-			swap(mas[z][i], mas[z][j]);
+			std::swap(mas[z][i], mas[z][j]);
 		}
 	}
 
@@ -661,7 +663,7 @@ public:
 				{
 					c.mas[j] += c.mas[i];
 				}
-				number gcd = __gcd(c.mas[i][j], c.mas[j][i]);
+				number gcd = std::__gcd(c.mas[i][j], c.mas[j][i]);
 				mn *= c.mas[j][j] / gcd;
 				c.mas[i] *= c.mas[j][j] / gcd;
 				int d = c.mas[i][j] / c.mas[j][j];
@@ -670,6 +672,16 @@ public:
 			res *= c.mas[j][j];
 		}
 		return res / mn;
+	}
+
+	number sum()
+	{
+		number res = 0;
+		for(int i = 0; i < n; i++)
+		{
+			res += mas[i].sum();
+		}
+		return res;
 	}
 
 };
@@ -719,4 +731,22 @@ Math_Matrix<number> operator *(number2 b, Math_Matrix<number> a)
 }
 
 
+template <class number>
+bool operator ==(const Math_Matrix<number>& a, const Math_Matrix<number>& b)
+{
+	Math_Matrix<number> a2 = a;
+	Math_Matrix<number> b2 = b2;
+	return a2.isEqual(b2);
 }
+
+template <class number>
+bool operator !=(const Math_Matrix<number>& a, const Math_Matrix<number>& b)
+{
+	Math_Matrix<number> a2 = a;
+	Math_Matrix<number> b2 = b;
+	return !a2.isEqual(b2);
+}
+
+
+}
+

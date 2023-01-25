@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
-#include "vector.h"
-
-using namespace std;
+#include <WVL/matrices/vector.h>
 
 TEST(VectorConstructor, ConstructorTest1)
 {
@@ -801,13 +799,13 @@ TEST(Methods, stream)
 	mas = {4, 3};
 	wvl::Math_Vector<int> vec;
 	vec = mas;
-	fstream file;
-	file.open("test.txt", ios::out);
+	std::fstream file;
+	file.open("test.txt", std::ios::out);
 	file << vec;
 	file.close();
 
 	wvl::Math_Vector<int> vec2;
-	file.open("test.txt", ios::in);
+	file.open("test.txt", std::ios::in);
 	file >> vec2;
 	file.close();
 	EXPECT_EQ(vec.get(), vec2.get());

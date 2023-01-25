@@ -29,9 +29,9 @@ $(include)matrix.h: matrix.h
 	chmod 744 $(include)vector.h
 
 .PHONY: test
-test: test.o
+test: install test.o
 	./test.o
-test.o: test.cpp vector.h matrix.h
+test.o: test.cpp  vectortests.h matrixtests.h
 	g++ test.cpp /usr/local/lib/libgtest.a -o test.o
 
 
